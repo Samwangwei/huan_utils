@@ -3,27 +3,15 @@ import traceback
 from clickhouse_driver import Client
 from common import string
 
-host = '159.75.238.142'
-port = '8123'
-user = 'default'
-pwd = 'DpZUlmm8pZkqNcBx'
-db = 'bp'
-send_receive_time = 5
+host = ''
+port = ''
+user = ''
+pwd = ''
+db = ''
 
 
 def get_conn():
     return Client(host=host, user=user, password=pwd, database=db)
-
-
-# def execute(sql):
-#     try:
-#         cd_conn = get_conn()
-#         res = cd_conn.execute(sql)
-#         return res
-#     except:
-#         print(sql)
-#         traceback.print_exc()
-
 
 if __name__ == "__main__":
     conn = get_conn()
