@@ -1,19 +1,15 @@
-import pymysql
-
 # encoding=utf-8
+import json
 import traceback
 
 import pymysql
 
 from common.log import Log
 
-TEST = False
-DEBUG = True
-
 log = Log(__name__).getlog()
 
 
-def create_dict_cursor_conn(host, port, username, password, db, cursor_type=1):
+def create_conn(host, port, username, password, db, cursor_type=1):
     try:
         if cursor_type == 0:
             return pymysql.connect(host=host,
@@ -41,7 +37,7 @@ def create_cursor(conn):
         return None
 
 
-def _execute(sql, conn, op_type):
+def __execute(sql, conn, op_type):
     if conn is None:
         return None
     cursor = create_cursor(conn)
@@ -70,16 +66,16 @@ def _execute(sql, conn, op_type):
 
 
 def execute_select(sql, conn=None):
-    res = _execute(sql, conn, 'select')
+    return __execute(sql, conn, 'select')
 
 
 def execute_delete(sql, conn=None):
-    _execute(sql, conn, 'delete')
+    return __execute(sql, conn, 'delete')
 
 
 def execute_update(sql, conn=None):
-    _execute(sql, conn, 'update')
+    return __execute(sql, conn, 'update')
 
 
 def execute_insert(sql, conn=None):
-    _execute(sql, conn, 'insert')
+    return __execute(sql, conn, 'insert')
